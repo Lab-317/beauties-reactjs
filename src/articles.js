@@ -54,7 +54,8 @@ var ArticleBox = React.createClass({
             number: data.page.number,
             totalPages: data.page.totalPages,
             nextPage: data.page.number + 1
-          }
+          },
+          isLoading: false
         });
       }.bind(this),
       error: function(xhr, status, err) {
@@ -69,7 +70,8 @@ var ArticleBox = React.createClass({
         number: 0,
         totalPages: 0,
         nextPage: 1
-      }
+      },
+      isLoading: false
     };
   },
   componentDidMount: function() {
@@ -85,9 +87,11 @@ var ArticleBox = React.createClass({
         windowInnerHeight = window.innerHeight;
 
     let isScrollBottom = pageYOffset + windowInnerHeight > bodyHeight - 10,
-        isNextPageExist = this.state.page.number < this.state.page.totalPages;
+        isNextPageExist = this.state.page.number < this.state.page.totalPages,
+        isLoading = this.state.isLoading;
 
-    if (isScrollBottom && isNextPageExist) {
+    if (isScrollBottom && isNextPageExist && !isLoading) {
+      this.setState({isLoading: true});
       this.loadArticles();
     }
   },
