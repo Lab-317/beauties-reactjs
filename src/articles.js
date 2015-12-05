@@ -101,6 +101,6 @@ var ArticleBox = React.createClass({
 });
 
 ReactDOM.render(
-  <ArticleBox url="../data/articles/"/>,
+  <ArticleBox url="/beauties-reactjs/data/articles/"/>,
   document.getElementById('content')
 );
