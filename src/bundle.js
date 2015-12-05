@@ -21504,6 +21504,6 @@ var ArticleBox = React.createClass({
   }
 });
 
-ReactDOM.render(React.createElement(ArticleBox, { url: '/beauties-reactjs/data/articles/' }), document.getElementById('content'));
+ReactDOM.render(React.createElement(ArticleBox, { url: 'data/articles/' }), document.getElementById('content'));
 
 },{"bootstrap":2,"react":171,"react-dom":15}]},{},[172]);
