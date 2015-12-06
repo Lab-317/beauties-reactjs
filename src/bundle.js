@@ -21399,6 +21399,11 @@ var bootstrap = require('bootstrap');
 var Article = React.createClass({
   displayName: 'Article',
 
+  handleImageload: function (event) {
+    if (this.props.path) {
+      event.target.src = this.props.path;
+    }
+  },
   render: function () {
     return React.createElement(
       'div',
@@ -21408,15 +21413,15 @@ var Article = React.createClass({
         { className: 'thumbnail' },
         React.createElement(
           'a',
-          { href: this.props.url },
-          React.createElement('img', { src: this.props.path, alt: this.props.title })
+          { href: this.props.url, target: '_blank' },
+          React.createElement('img', { src: 'public/img/error.jpg', alt: this.props.title, onLoad: this.handleImageload })
         ),
         React.createElement(
           'div',
           { className: 'caption' },
           React.createElement(
             'h4',
-            null,
+            { className: 'text-ellipsis' },
             this.props.title
           )
         )
@@ -21430,7 +21435,7 @@ var ArticleList = React.createClass({
 
   render: function () {
     var articleNodes = this.props.data.map(function (article) {
-      return React.createElement(Article, { path: article.randomThumbnailUrl, title: article.title, url: "https://www.ptt.cc" + article.url });
+      return React.createElement(Article, { path: article.randomThumbnailUrl, title: article.title, url: article.urlWithPrefix });
     });
     return React.createElement(
       'div',
@@ -21444,11 +21449,16 @@ var ArticleBox = React.createClass({
   displayName: 'ArticleBox',
 
   loadArticles: function () {
+
+    // for local json file testing
+    // var url = this.props.url + this.state.page.nextPage + '.json'
+    this.url = this.props.url + '?page=' + this.state.page.nextPage;
+
     $.ajax({
-      url: this.props.url + this.state.page.nextPage + '.json',
+      url: this.url,
       dataType: 'json',
-      // dataType: 'jsonp',
       // crossDomain: true,
+      // dataType: 'jsonp',
       cache: false,
       success: (function (data) {
         let articles = this.state.data.concat(data._embedded.articles);
@@ -21490,7 +21500,7 @@ var ArticleBox = React.createClass({
         pageYOffset = window.pageYOffset,
         windowInnerHeight = window.innerHeight;
 
-    let isScrollBottom = pageYOffset + windowInnerHeight > bodyHeight - 10,
+    let isScrollBottom = pageYOffset + windowInnerHeight > bodyHeight - 400,
         isNextPageExist = this.state.page.number < this.state.page.totalPages,
         isLoading = this.state.isLoading;
 
@@ -21508,6 +21518,10 @@ var ArticleBox = React.createClass({
   }
 });
 
-ReactDOM.render(React.createElement(ArticleBox, { url: 'data/articles/' }), document.getElementById('content'));
+ReactDOM.render(
+
+// json path for local testing
+// <ArticleBox url="data/articles/"/>,
+React.createElement(ArticleBox, { url: '//beauties-lab317.rhcloud.com/articles' }), document.getElementById('content'));
 
 },{"bootstrap":2,"react":171,"react-dom":15}]},{},[172]);

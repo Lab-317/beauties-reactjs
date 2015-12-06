@@ -6,15 +6,20 @@ var ReactDOM = require('react-dom');
 var bootstrap = require('bootstrap');
 
 var Article = React.createClass({
+  handleImageload: function(event) {
+    if (this.props.path) {
+      event.target.src = this.props.path;
+    }
+  },
   render: function() {
     return (
       <div className="col-xs-6 col-sm-4 col-md-4 col-lg-3 article">
         <div className="thumbnail">
-          <a href={this.props.url}>
-            <img src={this.props.path} alt={this.props.title}/>
+          <a href={this.props.url} target="_blank">
+            <img src="public/img/error.jpg" alt={this.props.title} onLoad={ this.handleImageload }/>
           </a>
           <div className="caption">
-          <h4>{this.props.title}</h4>
+          <h4 className="text-ellipsis">{this.props.title}</h4>
           </div>
         </div>
       </div>
@@ -26,7 +31,7 @@ var ArticleList = React.createClass({
   render: function() {
     var articleNodes = this.props.data.map(function(article) {
       return (
-        <Article path={article.randomThumbnailUrl} title={article.title} url={"https://www.ptt.cc" + article.url}>
+        <Article path={article.randomThumbnailUrl} title={article.title} url={article.urlWithPrefix}>
         </Article>
       );
     });
@@ -40,11 +45,16 @@ var ArticleList = React.createClass({
 
 var ArticleBox = React.createClass({
   loadArticles: function() {
+
+    // for local json file testing
+    // var url = this.props.url + this.state.page.nextPage + '.json'
+    this.url = this.props.url + '?page=' + this.state.page.nextPage;
+
     $.ajax({
-      url: this.props.url + this.state.page.nextPage + '.json',
+      url: this.url,
       dataType: 'json',
-      // dataType: 'jsonp',
       // crossDomain: true,
+      // dataType: 'jsonp',
       cache: false,
       success: function(data) {
         let articles = this.state.data.concat(data._embedded.articles);
@@ -86,7 +96,7 @@ var ArticleBox = React.createClass({
         pageYOffset = window.pageYOffset,
         windowInnerHeight = window.innerHeight;
 
-    let isScrollBottom = pageYOffset + windowInnerHeight > bodyHeight - 10,
+    let isScrollBottom = pageYOffset + windowInnerHeight > bodyHeight - 400,
         isNextPageExist = this.state.page.number < this.state.page.totalPages,
         isLoading = this.state.isLoading;
 
@@ -105,6 +115,9 @@ var ArticleBox = React.createClass({
 });
 
 ReactDOM.render(
-  <ArticleBox url="data/articles/"/>,
+
+  // json path for local testing
+  // <ArticleBox url="data/articles/"/>,
+  <ArticleBox url="//beauties-lab317.rhcloud.com/articles"/>,
   document.getElementById('content')
 );
