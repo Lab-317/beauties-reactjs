@@ -19,7 +19,7 @@ var Article = React.createClass({
             <img src="public/img/error.jpg" alt={this.props.title} onLoad={ this.handleImageload }/>
           </a>
           <div className="caption">
-          <h4 className="text-ellipsis">{this.props.title}</h4>
+          <h4 className="text-ellipsis"><span className="label label-success">{this.props.pushNum}</span>{this.props.title}</h4>
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@ var ArticleList = React.createClass({
   render: function() {
     var articleNodes = this.props.data.map(function(article) {
       return (
-        <Article path={article.randomThumbnailUrl} title={article.title} url={article.urlWithPrefix}>
+        <Article path={article.randomThumbnailUrl} title={article.title} url={article.urlWithPrefix} pushNum={article.pushNum}>
         </Article>
       );
     });

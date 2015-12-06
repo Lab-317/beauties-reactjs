@@ -21422,6 +21422,11 @@ var Article = React.createClass({
           React.createElement(
             'h4',
             { className: 'text-ellipsis' },
+            React.createElement(
+              'span',
+              { className: 'label label-success' },
+              this.props.pushNum
+            ),
             this.props.title
           )
         )
@@ -21435,7 +21440,7 @@ var ArticleList = React.createClass({
 
   render: function () {
     var articleNodes = this.props.data.map(function (article) {
-      return React.createElement(Article, { path: article.randomThumbnailUrl, title: article.title, url: article.urlWithPrefix });
+      return React.createElement(Article, { path: article.randomThumbnailUrl, title: article.title, url: article.urlWithPrefix, pushNum: article.pushNum });
     });
     return React.createElement(
       'div',
