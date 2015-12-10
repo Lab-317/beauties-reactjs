@@ -3,20 +3,27 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-var bootstrap = require('bootstrap');
+//var bootstrap = require('bootstrap');
 
 var Article = React.createClass({
+  getInitialState: function() {
+    return {isError: false};
+  },
   handleImageload: function(event) {
-    if (this.props.path) {
+    if (this.props.path && !this.state.isError) {
       event.target.src = this.props.path;
     }
+  },
+  handleImageError: function(event) {
+    event.target.src = "public/img/error.jpg";
+    this.setState({isError: true});
   },
   render: function() {
     return (
       <div className="col-xs-6 col-sm-4 col-md-4 col-lg-3 article">
         <div className="thumbnail">
           <a href={this.props.url} target="_blank">
-            <img src="public/img/error.jpg" alt={this.props.title} onLoad={ this.handleImageload }/>
+            <img src="public/img/error.jpg" alt={this.props.title} onLoad={ this.handleImageload } onError={ this.handleImageError }/>
           </a>
           <div className="caption">
           <h4 className="text-ellipsis"><span className="label label-success">{this.props.pushNum}</span>{this.props.title}</h4>
@@ -48,7 +55,7 @@ var ArticleBox = React.createClass({
 
     // for local json file testing
     // var url = this.props.url + this.state.page.nextPage + '.json'
-    this.url = this.props.url + '?page=' + this.state.page.nextPage;
+    this.url = this.props.url + '&page=' + this.state.page.nextPage;
 
     $.ajax({
       url: this.url,
@@ -77,9 +84,9 @@ var ArticleBox = React.createClass({
     return {
       data: [],
       page: {
-        number: 0,
+        number: 6, // waiting for image produce, so start from page 6
         totalPages: 0,
-        nextPage: 1
+        nextPage: 7
       },
       isLoading: false
     };
@@ -96,7 +103,7 @@ var ArticleBox = React.createClass({
         pageYOffset = window.pageYOffset,
         windowInnerHeight = window.innerHeight;
 
-    let isScrollBottom = pageYOffset + windowInnerHeight > bodyHeight - 400,
+    let isScrollBottom = pageYOffset + windowInnerHeight > bodyHeight / 4,
         isNextPageExist = this.state.page.number < this.state.page.totalPages,
         isLoading = this.state.isLoading;
 
@@ -118,6 +125,6 @@ ReactDOM.render(
 
   // json path for local testing
   // <ArticleBox url="data/articles/"/>,
-  <ArticleBox url="//beauties-lab317.rhcloud.com/articles"/>,
+  <ArticleBox url="//beauties-lab317.rhcloud.com/articles?sort=url,desc"/>,
   document.getElementById('content')
 );
