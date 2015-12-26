@@ -1,0 +1,40 @@
+{
+  "url" : "/bbs/Beauty/M.1448518036.A.A2F.html",
+  "title" : "[正妹] 小清新工讀生",
+  "pushNum" : 22,
+  "author" : "SP2928",
+  "createdTime" : "2015-12-01T14:29:17.264+0000",
+  "articleImage" : [ {
+    "url" : "http://i.imgur.com/CjWWH5G.jpg",
+    "thumbnailUrl" : "http://thumborservice-lab317.rhcloud.com/unsafe/300x300/http://i.imgur.com/CjWWH5G.jpg"
+  }, {
+    "url" : "http://i.imgur.com/LWf0BBC.jpg",
+    "thumbnailUrl" : "http://thumborservice-lab317.rhcloud.com/unsafe/300x300/http://i.imgur.com/LWf0BBC.jpg"
+  }, {
+    "url" : "http://i.imgur.com/fe683bG.jpg",
+    "thumbnailUrl" : "http://thumborservice-lab317.rhcloud.com/unsafe/300x300/http://i.imgur.com/fe683bG.jpg"
+  }, {
+    "url" : "http://i.imgur.com/OT8nXIT.jpg",
+    "thumbnailUrl" : "http://thumborservice-lab317.rhcloud.com/unsafe/300x300/http://i.imgur.com/OT8nXIT.jpg"
+  }, {
+    "url" : "http://i.imgur.com/nSs8Zun.jpg",
+    "thumbnailUrl" : "http://thumborservice-lab317.rhcloud.com/unsafe/300x300/http://i.imgur.com/nSs8Zun.jpg"
+  }, {
+    "url" : "http://i.imgur.com/OazqkRf.jpg",
+    "thumbnailUrl" : "http://thumborservice-lab317.rhcloud.com/unsafe/300x300/http://i.imgur.com/OazqkRf.jpg"
+  } ],
+  "randomThumbnailUrl" : "http://thumborservice-lab317.rhcloud.com/unsafe/300x300/http://i.imgur.com/OazqkRf.jpg",
+  "urlWithPrefix" : "https://www.ptt.cc/bbs/Beauty/M.1448518036.A.A2F.html",
+  "imageUrlRandom" : "http://i.imgur.com/OazqkRf.jpg",
+  "_links" : {
+    "self" : {
+      "href" : "http://beauties-lab317.rhcloud.com/articles/57"
+    },
+    "article" : {
+      "href" : "http://beauties-lab317.rhcloud.com/articles/57"
+    },
+    "articleImages" : {
+      "href" : "http://beauties-lab317.rhcloud.com/articles/57/articleImages"
+    }
+  }
+}
