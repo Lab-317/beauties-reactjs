@@ -79,9 +79,9 @@ const ArticleBox = React.createClass({
         return {
             data: [],
             page: {
-                number: 6, // waiting for image produce, so start from page 6
+                number: 7, // waiting for image produce, so start from page 6
                 totalPages: 0,
-                nextPage: 7
+                nextPage: 8
             },
             isLoading: false
         };
